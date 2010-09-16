@@ -11,6 +11,7 @@ import org.openrdf.model.impl.LiteralImpl ;
 
 import com.hp.hpl.jena.graph.Node_Literal ;
 
+@SuppressWarnings("serial")
 public class LiteralJena extends LiteralImpl implements Literal
 {
     //private Node_Literal nodeLiteral ;

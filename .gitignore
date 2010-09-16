@@ -1,10 +1,1 @@
-classes
-lib
-build
 target
-tmp
-Data
-src-dev
-D.ttl
-.externalToolBuilders
-maven-eclipse.xml

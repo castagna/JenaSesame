@@ -1,6 +1,6 @@
 <projectDescription>
   <name>jena-sesame</name>
-  <comment>Jena API over a Sesame reposiroty. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <comment>Jena API over a Sesame reposiroty</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

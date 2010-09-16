@@ -7,21 +7,19 @@
 
 package org.openjena.jenasesame.impl;
 
-import java.util.Iterator ;
+import java.util.Iterator;
 
-import org.openrdf.model.Resource ;
-import org.openrdf.repository.RepositoryConnection ;
-import org.openrdf.repository.RepositoryException ;
-import org.openrdf.repository.RepositoryResult ;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
 
-import com.hp.hpl.jena.graph.Graph ;
-import com.hp.hpl.jena.graph.Node ;
-import com.hp.hpl.jena.shared.Lock ;
-import com.hp.hpl.jena.shared.LockMRSW ;
-import com.hp.hpl.jena.sparql.ARQException ;
-import com.hp.hpl.jena.sparql.core.DatasetGraph ;
-import com.hp.hpl.jena.sparql.core.Quad ;
-import com.hp.hpl.jena.sparql.util.Context ;
+import com.hp.hpl.jena.graph.Graph;
+import com.hp.hpl.jena.graph.Node;
+import com.hp.hpl.jena.shared.Lock;
+import com.hp.hpl.jena.shared.LockMRSW;
+import com.hp.hpl.jena.sparql.ARQException;
+import com.hp.hpl.jena.sparql.core.DatasetGraph;
+import com.hp.hpl.jena.sparql.core.Quad;
+import com.hp.hpl.jena.sparql.util.Context;
 
 public class JenaSesameDatasetGraph implements DatasetGraph
 {
@@ -72,7 +70,7 @@ public class JenaSesameDatasetGraph implements DatasetGraph
     {
         try
         {
-            RepositoryResult<Resource> named = connection.getContextIDs() ;
+            /* RepositoryResult<Resource> named = */ connection.getContextIDs() ;
             // Mask bnodes.
             // Map to Jena terms 
             

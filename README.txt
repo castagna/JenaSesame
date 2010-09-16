@@ -1,6 +1,6 @@
 ==== JenaSesame
 
-This package aims to provide a stable, long-term bridge bwteen the two systems.
+This package aims to provide a stable, long-term bridge between the two systems.
  
 == Documentation
 

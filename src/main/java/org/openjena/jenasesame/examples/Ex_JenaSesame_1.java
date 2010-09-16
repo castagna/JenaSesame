@@ -4,27 +4,25 @@
  * [See end of file]
  */
 
-package examples;
+package org.openjena.jenasesame.examples;
 
-import java.io.File ;
+import java.io.File;
 
-import org.openjena.jenasesame.JenaSesame ;
+import org.openjena.jenasesame.JenaSesame;
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.sail.SailRepository;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.sail.memory.MemoryStore;
 
-import org.openrdf.repository.Repository ;
-import org.openrdf.repository.RepositoryConnection ;
-import org.openrdf.repository.sail.SailRepository ;
-import org.openrdf.rio.RDFFormat ;
-import org.openrdf.sail.memory.MemoryStore ;
-
-import com.hp.hpl.jena.query.Dataset ;
-import com.hp.hpl.jena.query.Query ;
-import com.hp.hpl.jena.query.QueryExecution ;
-import com.hp.hpl.jena.query.QueryExecutionFactory ;
-import com.hp.hpl.jena.query.QueryFactory ;
-import com.hp.hpl.jena.rdf.model.Model ;
-import com.hp.hpl.jena.rdf.model.Resource ;
-import com.hp.hpl.jena.rdf.model.ResourceFactory ;
-import com.hp.hpl.jena.sparql.util.QueryExecUtils ;
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.sparql.util.QueryExecUtils;
 
 /** Example: Create an in-memory repository, load some RDF, and query it. */
 public class Ex_JenaSesame_1
@@ -41,7 +39,7 @@ public class Ex_JenaSesame_1
 
         RepositoryConnection conn = repo.getConnection();
         
-        Resource r = ResourceFactory.createResource("http://example/") ;
+        /* Resource r = */ ResourceFactory.createResource("http://example/") ;
         
         //Model model = JenaSesame.createModel(conn) ;
         Dataset ds = JenaSesame.createDataset(conn) ;

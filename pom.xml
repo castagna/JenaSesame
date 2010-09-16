@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<project>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.openjena</groupId>
   <artifactId>jena-sesame</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>JenaSesame</name>
-  <version>0.0.0-SNAPSHOT</version>
 
+  <name>JenaSesame</name>
   <description>Jena API over a Sesame reposiroty</description>
-  <url>http://openjena.org/ARQ</url>
+  <url>http://www.openjena.org/wiki/JenaSesame</url>
 
   <organization>
     <name>Hewlett-Packard</name>
@@ -30,73 +29,39 @@
   </scm>
 
   <properties>
-    <this.root>${project.artifactId}-${project.version}</this.root>
-    <ver.jena>2.6.3</ver.jena>
-    <ver.arq>2.8.5</ver.arq>
-    <ver.sesame>2.3.2</ver.sesame>
+    <jena.version>2.6.3</jena.version>
+    <arq.version>2.8.5</arq.version>
+    <sesame.version>2.3.2</sesame.version>
+    <jdk.version>1.6</jdk.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
 
-    <!-- Brings in all of Jena and ARQ needed at runtime + some utilities + sources 
-    <dependency>
-      <groupId>com.hp.hpl.jena</groupId>
-      <artifactId>tdb</artifactId>
-      <version>0.8.5-SNAPSHOT</version>
-    </dependency>
-    -->
-
-    <!-- Jena and ARQ - including testing support -->
-
     <dependency>
       <groupId>com.hp.hpl.jena</groupId>
       <artifactId>jena</artifactId>
-      <version>${ver.jena}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.hp.hpl.jena</groupId>
-      <artifactId>jena</artifactId>
-      <classifier>tests</classifier>
-      <version>${ver.jena}</version>
+      <version>${jena.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.hp.hpl.jena</groupId>
       <artifactId>arq</artifactId>
-      <version>${ver.arq}</version>
+      <version>${arq.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>com.hp.hpl.jena</groupId>
-      <artifactId>arq</artifactId>
-      <classifier>tests</classifier>
-      <version>${ver.arq}</version>
-    </dependency>
-
-     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.5</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- OpenRDF Sesame -->
-
+    
     <dependency>
       <groupId>org.openrdf.sesame</groupId>
       <artifactId>sesame-runtime</artifactId>
-      <version>${ver.sesame}</version>
+      <version>${sesame.version}</version>
     </dependency>
-
+    
     <!-- Maven does not pull this in from sesame-runtime (but ivy does) -->
     <dependency>
       <groupId>org.openrdf.sesame</groupId>
       <artifactId>sesame-sail-nativerdf</artifactId>
-      <version>${ver.sesame}</version>
+      <version>${sesame.version}</version>
     </dependency>
-    
-    <!-- Choose logging -->
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -110,12 +75,32 @@
       <version>[1.2.12,)</version>
     </dependency>
 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.hp.hpl.jena</groupId>
+      <artifactId>jena</artifactId>
+      <version>${jena.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.hp.hpl.jena</groupId>
+      <artifactId>arq</artifactId>
+      <version>${arq.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>src-test</testSourceDirectory>
-    
     <!-- The filter file is written by antrun -->
     <filters>
       <filter>${project.basedir}/target/filter.properties</filter>
@@ -125,7 +110,7 @@
       <resource>
         <targetPath>org.openjena.jenasesame</targetPath>
         <filtering>true</filtering>
-        <directory>resources</directory>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
 
@@ -134,8 +119,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
 
@@ -155,12 +141,9 @@
         <executions> 
           <execution>
             <id>attach-sources</id>
-            <!-- <phase>package</phase> package is the default -->
+            <phase>package</phase>
             <goals>
-              <!-- Maven v2.2.0,1 jar-no-fork does not exist
-                   contrary to the documentation
-              -->
-              <goal>jar</goal> 
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
@@ -184,10 +167,9 @@
           <encoding>UTF-8</encoding>
           <windowtitle>${project.name} ${project.version}</windowtitle>
           <doctitle>${project.name} ${project.version}</doctitle>
-	  <!-- include com.hp.hpl.jena.query,com.hp.hpl.jena.update,com.hp.hpl.jena.query.larq -->
           <!-- Exclude the implementation -->
           <includePackageNames>org.openjena.jenasesame,org.openjena.sesamejena</includePackageNames>
-          <bottom>Copyright &#169; 2009 Talis Information Ltd</bottom>
+          <bottom>Copyright &#169; 2009 Talis Information Ltd.</bottom>
         </configuration>
       </plugin>
 
@@ -215,7 +197,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
-          <encoding>UTF-8</encoding>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
       
@@ -247,18 +229,26 @@ build.time.txt=${build.time.txt}
               <goal>run</goal>
             </goals>
           </execution>
-          <!-- Another task, another execution -->
         </executions>
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
+        <artifactId>maven-eclipse-plugin</artifactId>
         <configuration>
-          <outputDirectory>lib2</outputDirectory>
-          <overWriteReleases>false</overWriteReleases>
-          <overWriteSnapshots>false</overWriteSnapshots>
-          <overWriteIfNewer>true</overWriteIfNewer>
+         <buildOutputDirectory>${project.build.directory}/classes-eclipse</buildOutputDirectory>
+         <downloadSources>true</downloadSources>
+         <downloadJavadocs>false</downloadJavadocs>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <remoteTagging>true</remoteTagging>
+          <preparationGoals>clean install</preparationGoals>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
         </configuration>
       </plugin>
 
@@ -266,30 +256,7 @@ build.time.txt=${build.time.txt}
 
   </build>
 
- <repositories>
-
-    <!-- jena-repo is mirrored to Maven central repository -->
-    <!-- In case mirroring has not happened yet ... -->
-    <repository>
-      <id>repo-jena</id>
-      <name>Jena Maven - Repository</name>
-      <layout>default</layout>
-      <url>http://openjena.org/repo</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-
-    <!-- jena-repo-dev is where SNAPSHOTs and RCs are published -->  
-    <repository>
-      <id>repo-jena-dev</id>
-      <name>Jena Maven - Development Repository</name>
-      <layout>default</layout>
-      <url>http://openjena.org/repo-dev</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
+  <repositories>
 
     <repository>
       <id>repo-openrdf</id>
@@ -301,26 +268,14 @@ build.time.txt=${build.time.txt}
   </repositories>
 
   <distributionManagement>
-    <downloadUrl>http://openjena.org/repo-dev</downloadUrl>
-
-    <!-- In development - release to development repo -->
-
     <repository>
-      <id>jena-repo</id>
-      <name>Jena repo</name>
-      <!--<url>sftp://openjena.org/var/repo</url>-->
-      <url>sftp://openjena.org/var/repo-dev</url>
-      <!--<url>file:tmp</url>-->
-      <layout>default</layout>
-    </repository> 
-
+      <id>talis-oss-releases</id>
+      <url>http://oss.talisplatform.com/content/repositories/talis-releases</url>
+    </repository>
     <snapshotRepository>
-      <id>jena-repo-dev</id>
-      <name>Jena development repo</name>
-      <url>sftp://openjena.org/var/repo-dev</url>
-      <layout>default</layout>
+      <id>talis-oss-snapshots</id>
+      <url>http://oss.talisplatform.com/content/repositories/talis-snapshots</url>
     </snapshotRepository>
-
   </distributionManagement>
 
 </project>

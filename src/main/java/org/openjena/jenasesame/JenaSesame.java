@@ -36,7 +36,7 @@ public class JenaSesame
         QueryEngineRegistry.addFactory(factory) ;
     }
 
-    private QueryEngineFactory getQueryEngineFactory() { return factory ; }
+    /* private QueryEngineFactory getQueryEngineFactory() { return factory ; } */
     
     /** Create a Model that is backed by a repository.
      *  The model is the triples seen with no specification of the context.  
